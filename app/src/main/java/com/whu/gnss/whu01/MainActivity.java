@@ -15,16 +15,13 @@ import android.Manifest;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.core.app.ActivityCompat;
-
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.wms.WMSTileSource;
-
 import java.util.List;
 
 
@@ -44,20 +41,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //虚拟机调试
         mapView = findViewById(R.id.osmMapView);
         mapView.setMultiTouchControls(true);
-        WMSTileSource wmsTileSource = new WMSTileSource("OGC:WMS", new String[]{"http://202.114.122.22:2107/geoserver/whuB05/wms?service=WMS"}, "whuB05:basemap", "1.1.1", "EPSG:900913", "", 256);
+        WMSTileSource wmsTileSource = new WMSTileSource("OGC:WMS", new String[]{"http://202.114.122.22:2107/geoserver/whuXX/wms?service=WMS"}, "whuXX:basemap", "1.1.1", "EPSG:3857", "", 256);
         mapView.setTileSource(wmsTileSource);
+
+        //手机调试
+//        mapView.setTileSource(TileSourceFactory.MAPNIK);
+//        mapView.setMultiTouchControls(true);
         mapView.getController().setCenter(new GeoPoint(30.538, 114.3618));
         mapView.setMinZoomLevel(15.0);
         mapView.setMaxZoomLevel(20.0);
         mapView.getController().setZoom(15.0);
-
-        // 华为手机调试
-//        Configuration.getInstance().setUserAgentValue(getPackageName());
-//        mapView = findViewById(R.id.osmMapView);
-//        mapView.setTileSource(TileSourceFactory.MAPNIK);
-//        mapView.setMultiTouchControls(true);
-//        mapView.getController().setCenter(new GeoPoint(30.538, 114.3618));
-//        mapView.getController().setZoom(15.0);
 
         ActivityResultLauncher<String[]> locationPermissionRequest =
                 registerForActivityResult(new ActivityResultContracts
@@ -134,8 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         m_btnRoute = findViewById(R.id.m_btnRoute);
         m_btnRoute.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -158,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //添加查询到的路径叠置图层
                 mapView.getOverlays().add(route.getRouteGeometry());
 
-                List<GeoPoint>  points = route.getRouteGeometry().getActualPoints();
+                List<GeoPoint> points = route.getRouteGeometry().getActualPoints();
                 //路径起点标注
                 Marker startMarker = new Marker(mapView);
                 startMarker.setPosition(points.get(0));
