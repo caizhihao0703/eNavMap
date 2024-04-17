@@ -12,6 +12,16 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="33dp"
         tools:layout_editor_absoluteY="43dp"/>
+    <Button
+        android:id="@+id/m_btnRoute"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Route"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
